@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View,Image,TouchableOpacity, Button, ScrollView,TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View,Image,TouchableOpacity, Button, ImageBackground, ScrollView,TouchableHighlight, Animated } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 // import { Card } from 'react-native-paper';
 
@@ -73,18 +73,113 @@ getWeekday = function(a){
 
 var month = new Date().getMonth()
 class Logo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {fadeIn1: new Animated.Value(1),
+                  fadeIn2: new Animated.Value(1),
+                  fadeIn3: new Animated.Value(1),
+                 };
+ }
+
+ fadeIn1() {
+  this.state.fadeIn1.setValue(1)                  
+  Animated.timing(
+    this.state.fadeIn1,           
+    {
+      toValue: 0,                   
+      duration: 500,              
+    }
+  ).start(() => this.fadeOut1());                        
+}
+
+  fadeOut1() {
+    this.state.fadeIn1.setValue(0)
+    Animated.timing(                  
+      this.state.fadeIn1,            
+      {
+        toValue: 1,                   
+        duration: 500,              
+      }
+    ).start(() => this.fadeIn2());                        
+  }
+
+  fadeIn2() {
+    this.state.fadeIn2.setValue(1)                  
+    Animated.timing(
+      this.state.fadeIn2,           
+      {
+        toValue: 0,                   
+        duration: 500,              
+      }
+    ).start(() => this.fadeOut2());                        
+  }
+  
+  fadeOut2() {
+    this.state.fadeIn2.setValue(0)
+    Animated.timing(                  
+      this.state.fadeIn2,            
+      {
+        toValue: 1,                   
+        duration: 500,              
+      }
+    ).start(() => this.fadeIn3());                        
+  }
+
+  fadeIn3() {
+    this.state.fadeIn3.setValue(1)                  
+    Animated.timing(
+      this.state.fadeIn3,           
+      {
+        toValue: 0,                   
+        duration: 500,              
+      }
+    ).start(() => this.fadeOut3());                        
+  }
+  
+  fadeOut3() {
+    this.state.fadeIn3.setValue(0)
+    Animated.timing(                  
+      this.state.fadeIn3,            
+      {
+        toValue: 1,                   
+        duration: 500,              
+      }
+    ).start();                        
+  }
+  
+  tick() {
+    setInterval(()=> {this.fadeIn1()}, 3000)
+  }
+
   componentDidMount() {
     loc(this);
+    this.tick();
   }
   
   componentWillUnMount() {
     rol();
   }
+
+  // }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.illustration} source={require('./assets/Illustration.png')} />
+      <ImageBackground style={styles.illustration} source={require('./assets/Group.png')} >
+      
+      <Animated.View style={{opacity: this.state.fadeIn1}}>
+        <Image style={styles.face1} source={require('./assets/face1.png')} />
+        </Animated.View>
+      <Animated.View style={{opacity: this.state.fadeIn2}}>
+        <Image style={styles.face1} source={require('./assets/face2.png')} />
+        </Animated.View>
+      <Animated.View style={{opacity: this.state.fadeIn3}}>
+        <Image style={styles.face1} source={require('./assets/face3.png')} />
+        </Animated.View>
+      </ImageBackground>
         {/* <Text style={styles.title}>{I18n.t('DinDin')}</Text> */}
+        
         <Text style={styles.title}>DinDin</Text>
         <Text style={styles.sub}>Connecting food lovers</Text>
         <TouchableOpacity style = {styles.start} onPress={() => this.props.navigation.navigate('HomePage')}>
@@ -98,6 +193,7 @@ class Logo extends React.Component {
           onPress={() => this.props.navigation.navigate('HomePage')}
         /> */}
         {/* <Image style = {styles.start} source={require('./assets/getStarted.png')}/> */}
+      
       </View>
     );
   }
@@ -186,6 +282,8 @@ const styles = StyleSheet.create({
     marginBottom: 48,
   },
   illustration: {
+    // flex: 1,
+    // justifyContent: 'center',
     padding: 40,
   },
   title: {
@@ -330,6 +428,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center"
   },
+  face1:{
+    // marginLeft: wp("70%"),
+    marginTop: hp("1%")
+
+  }
+  
   
 });
 
