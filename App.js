@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View,Image,TouchableOpacity, Button, ImageBackground, ScrollView,TouchableHighlight, Animated } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation'
+import InviteCard from "./inviteCard.js"
+import setTimeSpace from "./invite_time&place"
 // import { Card } from 'react-native-paper';
 
 import {
@@ -217,14 +219,18 @@ class HomePage extends React.Component {
               <Text style={styles.month}>{getMonth(new Date().getMonth() + 2)}</Text>
             </View>
           </View>
+
         <View style = {styles.invite}>
-          <View style = {styles.card}>
-            <Image style={{margin:20}} source={require('./assets/face4.png')} />
-            <View style = {styles.details}>
-              <Text>Alma Evans</Text>
-              <Text>Sunday 17 June - 8:00pm</Text>
-            </View>
-          </View>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('InviteCard')}>
+            <View style = {styles.card} >
+                <Image style={{margin:20}} source={require('./assets/face4.png')} />
+                <View style = {styles.details}>
+                  <Text>Alma Evans</Text>
+                  <Text>Sunday 17 June - 8:00pm</Text>
+                </View>
+              </View>
+          </TouchableOpacity>
+          
           <View style = {styles.choice}>
               <TouchableHighlight style = {styles.declinebox} onPress={() => this.props.navigation.navigate('HomePage')}>
                 <View style={{flexDirection: "row",justifyContent: "center",alignItems: "center"}}>
@@ -240,26 +246,30 @@ class HomePage extends React.Component {
               </TouchableHighlight>
           </View>
         </View>
+
         <ScrollView>
           <View style = {styles.event}>
             <Text style={styles.Edate}>   {getWeekday(new Date().getDay())} {new Date().getDate()} {getMonth(new Date().getMonth())}</Text>
-            <View style ={ {justifyContent: "space-around",alignItems: "center",}}>
+            <TouchableOpacity style ={ {justifyContent: "space-around",alignItems: "center",}} onPress={() => this.props.navigation.navigate('setTimeSpace')}>
               <Image  source={require('./assets/addEvent.png')} />
-            </View>
+            </TouchableOpacity>
           </View>
           <View style = {styles.event}>
-          <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+1)} {new Date().getDate()+1} {getMonth(new Date().getMonth())}</Text>
-            <Image  source={require('./assets/addEvent.png')} />
-          </View>
+            <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+1)} {new Date().getDate()+1} {getMonth(new Date().getMonth())}</Text>
+            <TouchableOpacity style ={ {justifyContent: "space-around",alignItems: "center",}} onPress={() => this.props.navigation.navigate('setTimeSpace')}>
+              <Image  source={require('./assets/addEvent.png')} />
+            </TouchableOpacity>          </View>
           <View style = {styles.event}>
-          <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+2)} {new Date().getDate()+2} {getMonth(new Date().getMonth())}</Text>
-            <Image  source={require('./assets/addEvent.png')} />
-          </View>
+            <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+2)} {new Date().getDate()+2} {getMonth(new Date().getMonth())}</Text>
+            <TouchableOpacity style ={ {justifyContent: "space-around",alignItems: "center",}} onPress={() => this.props.navigation.navigate('setTimeSpace')}>
+              <Image  source={require('./assets/addEvent.png')} />
+            </TouchableOpacity>          </View>
         </ScrollView>
       </View>
     );
   }
 }
+
 
 
 const styles = StyleSheet.create({
@@ -443,6 +453,12 @@ const RootStack = createStackNavigator(
     HomePage: {
       screen: HomePage,
     },
+    InviteCard: {
+      screen: InviteCard,
+    },
+    setTimeSpace: {
+      screen: setTimeSpace
+    }
   },
   {
     initialRouteName: 'Home',
