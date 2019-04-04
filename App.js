@@ -258,12 +258,14 @@ class HomePage extends React.Component {
             <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+1)} {new Date().getDate()+1} {getMonth(new Date().getMonth())}</Text>
             <TouchableOpacity style ={ {justifyContent: "space-around",alignItems: "center",}} onPress={() => this.props.navigation.navigate('setTimeSpace')}>
               <Image  source={require('./assets/addEvent.png')} />
-            </TouchableOpacity>          </View>
+            </TouchableOpacity>          
+          </View>
           <View style = {styles.event}>
             <Text style={styles.Edate}>   {getWeekday(new Date().getDay()+2)} {new Date().getDate()+2} {getMonth(new Date().getMonth())}</Text>
             <TouchableOpacity style ={ {justifyContent: "space-around",alignItems: "center",}} onPress={() => this.props.navigation.navigate('setTimeSpace')}>
               <Image  source={require('./assets/addEvent.png')} />
-            </TouchableOpacity>          </View>
+            </TouchableOpacity>         
+           </View>
         </ScrollView>
       </View>
     );
