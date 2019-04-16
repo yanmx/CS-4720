@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View,Image,TouchableOpacity, Button, ImageBackground, ScrollView,TouchableHighlight, Animated } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import InviteCard from "./inviteCard.js"
 import setTimeSpace from "./invite_time&place"
 // import { Card } from 'react-native-paper';
-
+import translate from './translate'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -182,11 +182,11 @@ class Logo extends React.Component {
       
         {/* <Text style={styles.title}>{I18n.t('DinDin')}</Text> */}
         
-        <Text style={styles.title}>DinDin</Text>
-        <Text style={styles.sub}>Connecting food lovers</Text>
+        <Text style={styles.title}>{translate.t('appName')}</Text>
+        <Text style={styles.sub}>{translate.t('connect')}</Text>
         <TouchableOpacity style = {styles.start} onPress={() => this.props.navigation.navigate('HomePage')}>
           {/* <Image  source={require('./assets/getStarted.png')}/> */}
-          <Text style={styles.getStarted}>Get Started</Text>
+          <Text style={styles.getStarted}>{translate.t('start')}</Text>
         </TouchableOpacity>
         {/* <Button
           title="Get Started"
